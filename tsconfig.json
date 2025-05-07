@@ -1,0 +1,27 @@
+{
+    "include": ["src/**/*"],
+
+    "compilerOptions": {
+        // Typechecking
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "exactOptionalPropertyTypes": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noUncheckedIndexedAccess": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "strict": true,
+
+        // Modules
+        "allowSyntheticDefaultImports": false,
+        "module": "Preserve",
+        "verbatimModuleSyntax": true,
+
+        // Syntax
+        "erasableSyntaxOnly": true,
+        "target": "ESNext"
+    }
+}
