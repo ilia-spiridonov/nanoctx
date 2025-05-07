@@ -2,9 +2,9 @@ name: Check
 
 on:
   push:
-    branches: ["master"]
+    branches: [master]
   pull_request:
-    branches: ["master"]
+    branches: [master]
 
 jobs:
   check:
@@ -17,4 +17,4 @@ jobs:
     - run: corepack enable
     - run: corepack install
     - run: pnpm install --frozen-lockfile
-    - run: pnpm run typecheck
+    - run: pnpm run verify

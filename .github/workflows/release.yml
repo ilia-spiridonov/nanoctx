@@ -1,0 +1,23 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+        registry-url: https://registry.npmjs.org # generates .npmrc that reads $NODE_AUTH_TOKEN
+    - run: corepack enable
+    - run: corepack install
+    - run: pnpm install --frozen-lockfile
+    - run: pnpm run verify
+    - run: pnpm run build
+    - run: pnpm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
