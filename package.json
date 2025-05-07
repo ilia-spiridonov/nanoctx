@@ -1,6 +1,7 @@
 {
     "name": "@ilia-spiridonov/nanoctx",
     "version": "0.1.0",
+    "files": ["./dist"],
     "exports": {
         ".": "./dist/index.js"
     },
