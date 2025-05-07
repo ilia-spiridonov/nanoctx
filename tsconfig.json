@@ -22,6 +22,11 @@
 
         // Syntax
         "erasableSyntaxOnly": true,
-        "target": "ESNext"
+        "target": "ESNext",
+
+        // Emit
+        "declaration": true,
+        "outDir": "dist",
+        "removeComments": true
     }
 }

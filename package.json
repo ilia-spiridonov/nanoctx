@@ -1,7 +1,11 @@
 {
     "name": "@ilia-spiridonov/nanoctx",
     "version": "0.1.0",
+    "exports": {
+        ".": "./dist/index.js"
+    },
     "scripts": {
+        "build": "tsc",
         "typecheck": "tsc --noEmit"
     },
     "devDependencies": {
