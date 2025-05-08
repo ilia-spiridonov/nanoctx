@@ -64,6 +64,16 @@ const getImpl = (): Impl => {
     return impl;
 };
 
+/**
+ * Get merged data from all ancestral containers.
+ *
+ * Note that `get(container)` will NOT return data that was provided to `container` itself.
+ * This allows "shadowing" ancestral key-value pairs - providing the same keys, but new (extended) values.
+ *
+ * When multiple containers provide the same key, the closest one to `container` always wins.
+ *
+ * Shadow DOM is supported - `get()` will "jump" from ShadowRoot nodes to their host elements.
+ */
 export const get: Impl['get'] = (container) => getImpl().get(container);
 
 /**
