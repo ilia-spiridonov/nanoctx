@@ -66,6 +66,15 @@ const getImpl = (): Impl => {
 
 export const get: Impl['get'] = (container) => getImpl().get(container);
 
+/**
+ * Provide data to a container.
+ *
+ * When providing, new `data` always replaces the old one (if any), it will NOT be merged.
+ *
+ * There's no "unprovide" function - but you can do `provide(container, {})` to achieve the desired effect.
+ *
+ * The reference to the container is held weakly, so the container should get garbage-collected as expected when unmounted.
+ */
 export const provide: Impl['provide'] = (container, data) => getImpl().provide(container, data);
 
 /**
@@ -73,6 +82,7 @@ export const provide: Impl['provide'] = (container, data) => getImpl().provide(c
  *
  * The provided `callback` will always be called when `provide()` is called anywhere in the window.
  * There will NOT be any attempts to compare previous and current data and skip unnecessary updates.
+ *
  * Inside `callback`, it is safe to immediately call `get()` to obtain the latest data.
  *
  * Returns an "unsubscribe" function. Call it to clean up the subscription.
