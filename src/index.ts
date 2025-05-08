@@ -20,7 +20,7 @@ const getImpl = (): Impl => {
 
     const impl: Impl = {
         get: (container) => {
-            let node = container.parentNode; // Note: `container` itself is being intentionally excluded
+            let node = container.parentNode;
             const data: Data = {};
 
             while (node != null) {
@@ -64,8 +64,17 @@ const getImpl = (): Impl => {
     return impl;
 };
 
-// Facades
+export const get: Impl['get'] = (container) => getImpl().get(container);
 
-export const get: Impl['get'] = (...params) => getImpl().get(...params);
-export const provide: Impl['provide'] = (...params) => getImpl().provide(...params);
-export const subscribe: Impl['subscribe'] = (...params) => getImpl().subscribe(...params);
+export const provide: Impl['provide'] = (container, data) => getImpl().provide(container, data);
+
+/**
+ * Subscribe to all data changes.
+ *
+ * The provided `callback` will always be called when `provide()` is called anywhere in the window.
+ * There will NOT be any attempts to compare previous and current data and skip unnecessary updates.
+ * Inside `callback`, it is safe to immediately call `get()` to obtain the latest data.
+ *
+ * Returns an "unsubscribe" function. Call it to clean up the subscription.
+ */
+export const subscribe: Impl['subscribe'] = (callback) => getImpl().subscribe(callback);

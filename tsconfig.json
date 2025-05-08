@@ -27,7 +27,6 @@
 
         // Emit
         "declaration": true,
-        "outDir": "dist",
-        "removeComments": true
+        "outDir": "dist"
     }
 }
