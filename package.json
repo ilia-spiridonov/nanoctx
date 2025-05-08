@@ -1,6 +1,8 @@
 {
     "name": "@ilia-spiridonov/nanoctx",
     "version": "0.1.0",
+    "license": "MIT",
+    "repository": "github:ilia-spiridonov/nanoctx",
     "files": ["./dist"],
     "exports": {
         ".": "./dist/index.js"
