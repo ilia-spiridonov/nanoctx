@@ -1,6 +1,6 @@
 # Overview
 
-The problem that `nanoctx` aims to solve is somewhat specific to microfrontend (MFE) architectures,
+The problem that nanoctx aims to solve is somewhat specific to microfrontend (MFE) architectures,
 i.e. architectures where pages (or *documents*) are composed of multiple MFEs, as opposed to having been built by a single monolithic app.
 
 Here, an MFE is an isolated UI app that has its own lifecycle and *private state*.
@@ -31,7 +31,7 @@ A context has the following key properties:
 1. It is reactive - when a new value is provided, all consumers will be notified
 1. It can be "shadowed" - it's possible to have nested contexts, and a consumer will attach to the one that is the closest ancestor
 
-With that, `nanoctx` can be thought of as a framework/library-agnostic, extremely lightweight implementation of a global context,
+With that, nanoctx can be thought of as a framework/library-agnostic, extremely lightweight implementation of a global context,
 intended for sharing certain kinds of data between MFEs.
 
 ## Key assumptions

@@ -17,7 +17,7 @@ To understand what this library is for and what it can/cannot do, please read [O
 
 Then, for more concrete code examples, see [Example](docs/example.md).
 
-While `nanoctx` is a standalone library, it can be easily integrated with other libraries, namely:
+While nanoctx is a standalone library, it can be easily integrated with other libraries, namely:
 1. [React](docs/react.md)
 
 ## Supported browsers
