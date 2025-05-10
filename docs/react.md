@@ -1,7 +1,7 @@
 # React
 
 If you need to integrate nanoctx with React, here's an example to get you started:
-```ts
+```tsx
 // in ContainerRefContext.ts
 
 import { createContext } from 'react';
@@ -69,4 +69,35 @@ export const useGlobalContextValue = <K extends keyof Context>(key: K): Context[
 import { useGlobalContextValue } from './useGlobalContextValue';
 
 const userProfile = useGlobalContextValue('userProfile');
+```
+
+If you also need to provide data to the container, consider avoiding using Effects,
+because then there's a risk that a child MFE may get rendered before the data is provided
+(e.g. it gets rendered synchronously because its code was cached).
+
+Instead, try something like this:
+```tsx
+import { provide } from '@ilia-spiridonov/nanoctx';
+import { useContext, useRef } from 'react';
+
+import { ContainerRefContext } from './ContainerRefContext';
+
+/**
+ * Do not use this hook in more than one place, since that will result in data getting randomly overwritten, not merged.
+ *
+ * @param data data to provide to the container, must be memo-ed
+ */
+export const useProvideData = (data: Record<string, unknown>) => {
+    const container = useContext(ContainerRefContext);
+    if (container == null) {
+        throw new Error();
+    }
+
+    const providedData = useRef<typeof data | null>(null);
+
+    if (providedData.current !== data) {
+        provide(container, data);
+        providedData.current = data;
+    }
+};
 ```
