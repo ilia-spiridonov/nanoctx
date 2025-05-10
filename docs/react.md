@@ -101,3 +101,5 @@ export const useProvideData = (data: Record<string, unknown>) => {
     }
 };
 ```
+
+Alternatively, you can go with a heavy (Effect + State + conditional child rendering) approach, which may feel more traditional.
