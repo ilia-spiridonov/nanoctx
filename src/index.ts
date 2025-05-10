@@ -33,11 +33,8 @@ const getImpl = (): Impl => {
                 }
 
                 let parent = node.parentNode;
-                if (parent == null) {
-                    const root = node.getRootNode();
-                    if (root instanceof ShadowRoot) {
-                        parent = root.host;
-                    }
+                if (parent == null && node instanceof ShadowRoot) {
+                    parent = node.host;
                 }
 
                 node = parent;
