@@ -37,10 +37,18 @@ intended for sharing certain kinds of data between MFEs.
 ## Key assumptions
 
 The library was built with the following assumptions in mind.
-If at least one of them is not true in your use case, you're likely looking at a wrong tool for the job.
 
-TODO
+1. All MFEs in the document form a tree - every MFE has a parent, except for the root one
+1. Every MFE has a *container* (topmost) Element that is in the DOM tree (can be inside Shadow DOM)
+1. If MFE A is an ancestor of MFE B, then the container of A is reachable by walking the tree up from the container of B
+
+Additional assumptions:
+1. Context data very rarely changes, so no need to implement an efficient reactivity system
 
 ## Important things that are not assumed
 
-TODO
+The library is designed to avoid sharing/duplication/ordering issues that are common in MFE setups.
+It is therefore safe to:
+1. Share this library (e.g. via Module Federation, native import maps, etc.) between any number of MFEs
+1. Duplicate this library arbitrarily many times (it's extremely small when minified+gzipped, so the performance hit is acceptable)
+1. When an upgrade is required, only upgrade it for the MFE that always runs first in the document's lifecycle (i.e. most likely the "root" MFE)
