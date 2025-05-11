@@ -73,3 +73,7 @@ const unsubscribe = subscribe(() => {
 // When unmounting...
 unsubscribe();
 ```
+
+## Done
+
+That's all nanoctx can do!
