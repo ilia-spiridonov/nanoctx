@@ -24,7 +24,7 @@ const getImpl = (): Impl => {
             const data: Data = {};
 
             while (node != null) {
-                if (node instanceof HTMLElement && providers.has(node)) {
+                if (node instanceof Element && providers.has(node)) {
                     for (const [key, value] of Object.entries(providers.get(node)!)) {
                         if (!Object.hasOwn(data, key)) {
                             data[key] = value;
@@ -32,12 +32,8 @@ const getImpl = (): Impl => {
                     }
                 }
 
-                let parent = node.parentNode;
-                if (parent == null && node instanceof ShadowRoot) {
-                    parent = node.host;
-                }
-
-                node = parent;
+                const parent = node.parentNode;
+                node = parent == null && node instanceof ShadowRoot ? node.host : parent;
             }
 
             return data;
