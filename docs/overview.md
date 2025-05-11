@@ -26,7 +26,7 @@ So how can every MFE have access to this object then?
 
 ### Approach 1
 
-The most straightforward and naive approach is of course to just pass it all the way down manually, through all layers and components.
+The most straightforward and naive approach is of course to just pass it all the way down manually, through all MFEs and components.
 In practice, this kind of approach quickly becomes very hard to maintain, so it doesn't scale.
 This problem is what is known as "prop drilling" (React term).
 
@@ -42,13 +42,13 @@ not just any MFEs that happen to look for that data at the right time.
 Let's introduce the concept of "context", which is somewhat similar to React Contexts if you're familiar with them.
 
 A context has the following key properties:
-1. It provides a value, which can be anything
-1. It "wraps" a tree of components (DOM nodes) and each one can consume the value directly without any intermediaries, regardless of its position
-1. It is reactive - when a new value is provided, all consumers will be notified
-1. It can be "shadowed" - it's possible to have nested contexts, and a consumer will attach to the one that is the closest ancestor
+1. It provides a set of key-value pairs, which can be anything
+1. It "wraps" a tree of MFEs/components and each one can consume values directly without any intermediaries, regardless of its position
+1. It is reactive - when a new pair is provided, all consumers will be notified
+1. It can be "shadowed" - it's possible to have nested contexts, and a consumer will take the value from the closest ancestral provider
 
 With that, nanoctx can be thought of as a framework/library-agnostic, extremely lightweight implementation of a global context,
-intended for sharing certain kinds of data between MFEs.
+intended for hierarchical sharing of certain kinds of data between MFEs.
 
 ## Key assumptions
 
@@ -61,7 +61,7 @@ The library was built with the following assumptions in mind.
 Additional assumptions:
 1. Context data very rarely changes, so no need to implement an efficient reactivity system
 
-## Important things that are not assumed
+## Not assumed
 
 The library is designed to avoid sharing/duplication/ordering issues that are common in MFE setups.
 It is therefore safe to:
